@@ -17,29 +17,33 @@ Claude Code users who have never used superpowers. They understand agentic codin
 
 Single repo with two branches:
 
-- **`main`** — A blank slate. Contains only the top-level README (what superpowers is, how to install it, what to build) and a minimal CLAUDE.md. Participants clone this and run superpowers themselves from scratch.
-- **`solution`** — The reference output from a real superpowers run: Wordle code, tests, spec, implementation plan, and annotated transcript. Participants can check this branch after completing the exercise to compare their output.
+- **`main`** — The starting point as-is: README (what superpowers is + the exercise), a minimal CLAUDE.md, and the `docs/superpowers/` scaffold (specs and plans directories). Participants clone this and run the exercise themselves.
+- **`solution`** — Created by actually following the exercise instructions on `main`. Contains the Wordle code, tests, spec, and plan produced by a real superpowers run. Not designed separately — it is the direct output of the exercise.
 
 ## Repo Structure
 
-### `main` branch — blank slate for participants
+### `main` branch — starting point for participants
 ```
 superpowers_tutorial/
-├── README.md      # What superpowers is, how to install it, what to build
-└── CLAUDE.md      # Minimal — superpowers provides its own instructions via the plugin
+├── README.md                        # What superpowers is + the exercise instructions
+├── CLAUDE.md                        # Minimal — superpowers provides its own instructions via the plugin
+└── docs/
+    └── superpowers/
+        ├── specs/                   # Where brainstorming skill writes the spec
+        └── plans/                   # Where writing-plans skill writes the plan
 ```
 
-### `solution` branch — reference output from a real superpowers run
+### `solution` branch — output of a real superpowers run (following the exercise)
 ```
 superpowers_tutorial/
 ├── README.md
 ├── CLAUDE.md
 ├── docs/
-│   └── demo/
-│       ├── README.md        # Narrative walkthrough of the run
-│       ├── spec.md          # Design doc produced by brainstorming skill
-│       ├── plan.md          # Implementation plan produced by writing-plans skill
-│       └── transcript.md   # Curated annotated highlights from the agent run
+│   └── superpowers/
+│       ├── specs/
+│       │   └── <date>-wordle.md     # Spec produced by brainstorming skill
+│       └── plans/
+│           └── <date>-wordle.md     # Plan produced by writing-plans skill
 └── wordle/
     ├── wordle.py
     ├── words.py
@@ -51,36 +55,21 @@ superpowers_tutorial/
 
 ### README.md (`main` branch)
 
-Four short sections that fit on one screen:
+Three short sections that fit on one screen:
 
-1. **What is superpowers?** — Two sentences on the methodology (brainstorm → spec → plan → TDD), link to official plugin.
-2. **Install** — Clone this repo, open a Claude Code session inside it, run `/plugin install superpowers@claude-plugins-official`. Superpowers is scoped to this project directory, not installed globally.
-3. **Your mission** — One sentence: *"Build a CLI Wordle game using Claude Code."* That's it — superpowers will guide the rest.
-4. **Compare your result** — After completing the exercise, check the `solution` branch to see the spec, plan, and Wordle produced by a reference run. Two optional extensions are suggested there (hard mode, session stats) for those who want to go further.
+1. **What is superpowers?** — Two sentences on the methodology (brainstorm → spec → plan → TDD), link to official plugin page.
+2. **Install** — Clone this repo, open a Claude Code session inside it, install the superpowers plugin. One command, scoped to this project directory.
+3. **The exercise** — *"Build a CLI Wordle game using Claude Code + superpowers."* Brief pointers on how to start (e.g. `/brainstorm` or just describe the goal to Claude). Ends with: check the `solution` branch afterward to compare your output.
 
-### docs/demo/ (`solution` branch)
+### `solution` branch
 
-**`README.md`** — Four sections telling the story of the reference run:
-1. The prompt that started it
-2. What superpowers did (clarifying questions → spec → plan → red/green TDD)
-3. The result (how to run the game and tests, with static test output)
-4. Why it worked (three bullets: spec before code, TDD enforced, no scope creep)
+The solution branch is created by following the exercise instructions on `main` — not designed separately. A real superpowers run on *"Build a CLI Wordle game"* produces the spec, plan, and implementation, which are committed as-is.
 
-**`transcript.md`** — Curated excerpts (not a full dump) of the most instructive moments: brainstorming questions, first failing test, first passing test, final test suite summary. Each excerpt has a one-line annotation.
+**`docs/superpowers/specs/<date>-wordle.md`** — Verbatim spec output from the brainstorming skill.
 
-**`spec.md` and `plan.md`** — Verbatim output from the superpowers run. The Wordle is built by running Claude Code + superpowers on *"Let's build a CLI Wordle game"*, answering its clarifying questions, and letting it execute the TDD plan. Outputs are committed unedited.
+**`docs/superpowers/plans/<date>-wordle.md`** — Verbatim plan output from the writing-plans skill.
 
-### wordle/ — The Wordle Implementation
-
-A Python CLI game with no dependencies beyond stdlib. Tests use `pytest` only.
-
-Core mechanics to implement (and test):
-- Word validation (5 letters, in word list)
-- Letter match scoring (correct / wrong position / absent)
-- Game loop (6 guesses, win/loss detection)
-- Display (colour-coded feedback in terminal)
-
-The implementation is the direct output of the superpowers TDD run — not cleaned up — so participants see realistic agent output.
+**`wordle/`** — Direct TDD output: `wordle.py`, `words.py`, `tests/test_wordle.py`. Not cleaned up.
 
 ## Constraints
 
