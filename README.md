@@ -35,3 +35,7 @@ When you're done, check the `solution` branch to compare your output with a refe
 ```bash
 git checkout solution
 ```
+
+## Further Reading
+
+- [ponytail](https://github.com/DietrichGebert/ponytail) — an interesting addition worth exploring
