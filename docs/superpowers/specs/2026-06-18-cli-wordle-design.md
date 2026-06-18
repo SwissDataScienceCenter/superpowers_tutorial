@@ -94,7 +94,7 @@ No file I/O, no network calls, no other runtime failure surfaces.
 
 ## Word List
 
-~2000 common 5-letter English words stored as a Python list literal in the source file. Serves as both the pool of valid target words and the set of accepted guesses (no separate valid-guesses list).
+~2000 common 5-letter English words stored as a Python list literal in the source file, all uppercase. Serves as both the pool of valid target words and the set of accepted guesses (no separate valid-guesses list). Input is uppercased before lookup, so the list and all comparisons operate in uppercase throughout.
 
 ---
 
