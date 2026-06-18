@@ -154,5 +154,28 @@ _WORDS = [  # filtered to exactly 5 letters and deduped into WORDS below
 WORDS = list({w for w in _WORDS if len(w) == 5})  # dedupe + enforce 5-letter constraint
 
 
+def score_guess(guess: str, target: str) -> list:
+    result = [None] * 5
+    target_remaining = list(target)
+
+    # First pass: correct positions
+    for i, (g, t) in enumerate(zip(guess, target)):
+        if g == t:
+            result[i] = (g, "correct")
+            target_remaining[i] = None
+
+    # Second pass: present letters
+    for i, g in enumerate(guess):
+        if result[i] is not None:
+            continue
+        if g in target_remaining:
+            result[i] = (g, "present")
+            target_remaining[target_remaining.index(g)] = None
+        else:
+            result[i] = (g, "absent")
+
+    return result
+
+
 if __name__ == "__main__":
     pass
