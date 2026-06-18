@@ -67,3 +67,26 @@ def test_render_empty_row_has_five_cells():
     # Should contain GRAY (blank cells) and RESET
     assert GRAY in row
     assert RESET in row
+
+
+from wordle import print_keyboard
+import io
+
+
+def test_print_keyboard_shows_correct_color(capsys):
+    scored = score_guess("CRANE", "CRANE")
+    history = [("CRANE", scored)]
+    print_keyboard(history)
+    out = capsys.readouterr().out
+    # All letters of CRANE are correct, so GREEN should appear
+    assert GREEN in out
+
+
+def test_print_keyboard_correct_beats_present(capsys):
+    # First guess marks C as present, second marks C as correct
+    scored1 = [("C", "present"), ("R", "absent"), ("A", "absent"), ("N", "absent"), ("E", "absent")]
+    scored2 = [("C", "correct"), ("R", "absent"), ("A", "absent"), ("N", "absent"), ("E", "absent")]
+    history = [("CRANZ", scored1), ("CRANE", scored2)]
+    print_keyboard(history)
+    out = capsys.readouterr().out
+    assert GREEN in out

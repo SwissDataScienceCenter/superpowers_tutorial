@@ -197,5 +197,30 @@ def print_board(history: list) -> None:
         print(render_empty_row())
 
 
+QWERTY = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"]
+PRIORITY = {"correct": 3, "present": 2, "absent": 1}
+
+
+def print_keyboard(history: list) -> None:
+    state = {}
+    for _, scored in history:
+        for letter, status in scored:
+            current = state.get(letter)
+            if current is None or PRIORITY[status] > PRIORITY[current]:
+                state[letter] = status
+
+    COLOR = {"correct": GREEN, "present": YELLOW, "absent": GRAY}
+    print()
+    for row in QWERTY:
+        cells = []
+        for letter in row:
+            status = state.get(letter)
+            if status:
+                cells.append(f"{COLOR[status]}{WHITE} {letter} {RESET}")
+            else:
+                cells.append(f" {letter} ")
+        print(" ".join(cells))
+
+
 if __name__ == "__main__":
     pass
