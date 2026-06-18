@@ -48,7 +48,7 @@ superpowers_tutorial/
 Three short sections that fit on one screen:
 
 1. **What is superpowers?** — Two sentences on the methodology (brainstorm → spec → plan → TDD), link to official plugin.
-2. **Install** — Copy-paste commands for Claude Code and the superpowers plugin (`/plugin install superpowers@claude-plugins-official`).
+2. **Install** — Instructions to install the superpowers plugin at project level: clone this repo, open a Claude Code session inside it, then run `/plugin install superpowers@claude-plugins-official`. Superpowers is scoped to this project directory, not installed globally.
 3. **What's in this repo** — One-line description of `docs/demo/` and `docs/exercise/`, pointer to start at `docs/demo/README.md`.
 
 ### docs/demo/README.md
