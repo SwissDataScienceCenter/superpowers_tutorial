@@ -222,5 +222,52 @@ def print_keyboard(history: list) -> None:
         print(" ".join(cells))
 
 
+def play() -> None:
+    assert WORDS, "Word list is empty"
+    target = random.choice(WORDS)
+    history = []
+    error = ""
+    attempt = 0
+
+    while attempt < 6:
+        print(CLEAR, end="")
+        print(f"  WORDLE  —  Attempt {attempt + 1}/6\n")
+        print_board(history)
+        print_keyboard(history)
+        if error:
+            print(f"\n{error}")
+            error = ""
+
+        guess = input("\nGuess: ").strip().upper()
+
+        if len(guess) != 5:
+            error = "Guess must be 5 letters."
+            continue
+        if not guess.isalpha():
+            error = "Letters only."
+            continue
+        if guess not in WORDS:
+            error = "Not in word list."
+            continue
+
+        scored = score_guess(guess, target)
+        history.append((guess, scored))
+        attempt += 1
+
+        if all(s == "correct" for _, s in scored):
+            print(CLEAR, end="")
+            print(f"  WORDLE\n")
+            print_board(history)
+            print_keyboard(history)
+            print(f"\nYou got it in {len(history)}! The word was {target}.")
+            return
+
+    print(CLEAR, end="")
+    print(f"  WORDLE\n")
+    print_board(history)
+    print_keyboard(history)
+    print(f"\nGame over! The word was {target}.")
+
+
 if __name__ == "__main__":
-    pass
+    play()
