@@ -1,7 +1,7 @@
 # Demo Repo Design: Superpowers Tutorial
 
 **Date:** 2026-06-18
-**Author:** christian.donner@datascience.ch
+**Author:** SDSC
 
 ## Purpose
 
@@ -72,7 +72,7 @@ Each excerpt has a one-line annotation explaining what superpowers was doing and
 
 ### docs/demo/spec.md and plan.md
 
-The actual design doc and implementation plan produced during the demo run. These are committed verbatim so participants can see the quality of output superpowers produces.
+The actual design doc and implementation plan produced during a real superpowers run. The Wordle is built by running Claude Code + superpowers on the prompt *"Let's build a CLI Wordle game"*, answering its clarifying questions, and letting it execute the TDD plan. The outputs (spec, plan, code, tests, transcript) are then committed verbatim so participants see realistic, unedited agent output.
 
 ### docs/exercise/README.md
 
