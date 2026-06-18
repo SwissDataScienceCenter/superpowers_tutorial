@@ -177,5 +177,25 @@ def score_guess(guess: str, target: str) -> list:
     return result
 
 
+def render_row(scored: list) -> str:
+    COLOR = {"correct": GREEN, "present": YELLOW, "absent": GRAY}
+    cells = []
+    for letter, status in scored:
+        cells.append(f"{COLOR[status]}{WHITE} {letter} {RESET}")
+    return " ".join(cells)
+
+
+def render_empty_row() -> str:
+    cell = f"{GRAY}   {RESET}"
+    return " ".join([cell] * 5)
+
+
+def print_board(history: list) -> None:
+    for guess, scored in history:
+        print(render_row(scored))
+    for _ in range(6 - len(history)):
+        print(render_empty_row())
+
+
 if __name__ == "__main__":
     pass

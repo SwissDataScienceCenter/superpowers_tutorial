@@ -1,5 +1,5 @@
 import pytest
-from wordle import score_guess
+from wordle import score_guess, render_row, render_empty_row, GREEN, YELLOW, GRAY, WHITE, RESET
 
 
 def test_all_correct():
@@ -41,3 +41,29 @@ def test_duplicate_correct_beats_present():
     result = score_guess("SEEDS", "SPEED")
     assert result[0] == ("S", "correct")   # S at 0 matches
     assert result[4] == ("S", "absent")    # second S, target S already matched
+
+
+def test_render_row_contains_green_for_correct():
+    scored = [("C", "correct"), ("R", "absent"), ("A", "absent"), ("N", "absent"), ("E", "absent")]
+    row = render_row(scored)
+    assert GREEN in row
+    assert "C" in row
+
+
+def test_render_row_contains_yellow_for_present():
+    scored = [("C", "present"), ("R", "absent"), ("A", "absent"), ("N", "absent"), ("E", "absent")]
+    row = render_row(scored)
+    assert YELLOW in row
+
+
+def test_render_row_contains_gray_for_absent():
+    scored = [("C", "absent"), ("R", "absent"), ("A", "absent"), ("N", "absent"), ("E", "absent")]
+    row = render_row(scored)
+    assert GRAY in row
+
+
+def test_render_empty_row_has_five_cells():
+    row = render_empty_row()
+    # Should contain GRAY (blank cells) and RESET
+    assert GRAY in row
+    assert RESET in row
